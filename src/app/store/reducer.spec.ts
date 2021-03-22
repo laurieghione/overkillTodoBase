@@ -1,6 +1,6 @@
 import * as fromReducer from './reducer';
 import { State } from './reducer';
-import { loadTodosSuccess } from './actions';
+import { loadTodosSuccess, setTodo } from './actions';
 
 describe('Reducer', () => {
   describe('unknown action', () => {
@@ -27,6 +27,32 @@ describe('Reducer', () => {
 
       expect(state).toEqual(newState);
       expect(state).not.toBe(newState);
+    });
+  });
+
+  describe('setTodo action', () => {
+    it('should update one todo, sort all todos and update the state', () => {
+      const initialState = {
+        todos: [
+          { title: 'todo 1', isClosed: false },
+          { title: 'todo 2', isClosed: false },
+        ],
+      };
+
+      const todos: State = {
+        todos: [
+          { title: 'todo 2', isClosed: false },
+          { title: 'todo 1', isClosed: true },
+        ],
+      };
+      const action = setTodo({
+        selectedTodo: { title: 'todo 1', isClosed: true },
+      });
+
+      const state = fromReducer.todosReducer(initialState, action);
+
+      expect(state).toEqual(todos);
+      expect(state).not.toBe(todos);
     });
   });
 });

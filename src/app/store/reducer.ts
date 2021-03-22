@@ -1,6 +1,6 @@
-import {Todo} from '../models/todo';
-import {createReducer, on} from '@ngrx/store';
-import {loadTodosSuccess} from './actions';
+import { Todo } from '../models/todo';
+import { createReducer, on } from '@ngrx/store';
+import { loadTodosSuccess, setTodo } from './actions';
 
 export const featureKey = 'todosStore';
 
@@ -12,13 +12,24 @@ export const initialState: State = {
   todos: [],
 };
 
-export const todosReducer = createReducer(
+export const todosReducer = createReducer<State>(
   initialState,
   on(
     loadTodosSuccess,
-    (state, { todos }) => ({
+    (state, { todos }): State => ({
       ...state,
-      todos
+      todos,
     })
   ),
+  on(
+    setTodo,
+    (state, { selectedTodo }): State => ({
+      ...state,
+      todos: state.todos
+        .map((todo) =>
+          todo.title === selectedTodo.title ? selectedTodo : todo
+        )
+        .sort((a, b) => (a.isClosed === b.isClosed ? 0 : a.isClosed ? 1 : -1)),
+    })
+  )
 );
