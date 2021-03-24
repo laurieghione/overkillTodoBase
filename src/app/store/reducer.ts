@@ -1,6 +1,6 @@
 import { Todo } from '../models/todo';
 import { createReducer, on } from '@ngrx/store';
-import { loadTodosSuccess, setTodo } from './actions';
+import { loadTodosSuccess, updateTodoSuccess } from './actions';
 
 export const featureKey = 'todosStore';
 
@@ -22,13 +22,11 @@ export const todosReducer = createReducer<State>(
     })
   ),
   on(
-    setTodo,
+    updateTodoSuccess,
     (state, { selectedTodo }): State => ({
       ...state,
       todos: state.todos
-        .map((todo) =>
-          todo.title === selectedTodo.title ? selectedTodo : todo
-        )
+        .map((todo) => (todo.id === selectedTodo.id ? selectedTodo : todo))
         .sort((a, b) => (a.isClosed === b.isClosed ? 0 : a.isClosed ? 1 : -1)),
     })
   )

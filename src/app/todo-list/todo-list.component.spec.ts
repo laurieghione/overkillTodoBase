@@ -11,7 +11,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { MockComponents, MockedComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -32,7 +32,7 @@ describe('TodoListComponent', () => {
           MatCard
         ),
       ],
-      imports: [MatRippleModule, FormsModule],
+      imports: [MatRippleModule, FormsModule, RouterTestingModule],
       providers: [provideMockStore()],
     }).compileComponents();
   });
@@ -43,8 +43,8 @@ describe('TodoListComponent', () => {
     component = fixture.componentInstance;
 
     mockTodosSelector = store.overrideSelector(selectTodos, [
-      { title: 'todo 1', isClosed: false },
-      { title: 'todo 2', isClosed: true },
+      { id: 0, title: 'todo 1', isClosed: false },
+      { id: 1, title: 'todo 2', isClosed: true },
     ]);
 
     fixture.detectChanges();
@@ -83,7 +83,7 @@ describe('TodoListComponent', () => {
     spyOn(component, 'onChange');
     const todoElement = fixture.debugElement.query(By.css('mat-checkbox'));
     todoElement.triggerEventHandler('change', {});
-    let selectedTodo = { title: 'todo 1', isClosed: false };
+    let selectedTodo = { id: 0, title: 'todo 1', isClosed: false };
     expect(component.onChange).toHaveBeenCalledOnceWith(selectedTodo);
   });
 });

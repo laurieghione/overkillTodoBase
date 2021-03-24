@@ -1,4 +1,4 @@
-<div id="container">
+<div class="container">
   <mat-card>
     <mat-card-title>Todos</mat-card-title>
     <mat-card-content>
@@ -15,7 +15,7 @@
               [checked]="todo.isClosed"
               disabled="false"
             ></mat-checkbox>
-            {{ todo.title }}
+            <a [routerLink]="['/todo', todo.id]"> {{ todo.title }}</a>
           </h4>
         </mat-list-item>
       </mat-list>

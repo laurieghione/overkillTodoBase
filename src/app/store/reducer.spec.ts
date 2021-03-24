@@ -1,6 +1,6 @@
 import * as fromReducer from './reducer';
 import { State } from './reducer';
-import { loadTodosSuccess, setTodo } from './actions';
+import { loadTodosSuccess, updateTodoSuccess } from './actions';
 
 describe('Reducer', () => {
   describe('unknown action', () => {
@@ -18,7 +18,9 @@ describe('Reducer', () => {
   describe('loadTodosSuccess action', () => {
     it('should retrieve all todos and update the state', () => {
       const { initialState } = fromReducer;
-      const newState: State = { todos: [{ title: 'aTitle', isClosed: false }] };
+      const newState: State = {
+        todos: [{ id: 0, title: 'aTitle', isClosed: false }],
+      };
       const action = loadTodosSuccess({
         todos: [...newState.todos],
       });
@@ -30,23 +32,23 @@ describe('Reducer', () => {
     });
   });
 
-  describe('setTodo action', () => {
+  describe('updateTodoSuccess action', () => {
     it('should update one todo, sort all todos and update the state', () => {
       const initialState = {
         todos: [
-          { title: 'todo 1', isClosed: false },
-          { title: 'todo 2', isClosed: false },
+          { id: 0, title: 'todo 1', isClosed: false },
+          { id: 1, title: 'todo 2', isClosed: false },
         ],
       };
 
       const todos: State = {
         todos: [
-          { title: 'todo 2', isClosed: false },
-          { title: 'todo 1', isClosed: true },
+          { id: 1, title: 'todo 2', isClosed: false },
+          { id: 0, title: 'todo 1', isClosed: true },
         ],
       };
-      const action = setTodo({
-        selectedTodo: { title: 'todo 1', isClosed: true },
+      const action = updateTodoSuccess({
+        selectedTodo: { id: 0, title: 'todo 1', isClosed: true },
       });
 
       const state = fromReducer.todosReducer(initialState, action);

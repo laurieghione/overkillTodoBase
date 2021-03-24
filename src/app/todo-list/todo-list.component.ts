@@ -3,8 +3,7 @@ import { Observable } from 'rxjs';
 import { Todo } from '../models/todo';
 import { Store } from '@ngrx/store';
 import { selectTodos } from '../store/selectors';
-import { loadTodos, setTodo } from '../store/actions';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { loadTodos, updateTodo } from '../store/actions';
 
 @Component({
   selector: 'app-todo-list',
@@ -19,12 +18,16 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadTodos());
+    this.todos$.subscribe((todos) => {
+      if (!todos.length) {
+        this.store.dispatch(loadTodos());
+      }
+    });
   }
 
   onChange(todo: Todo): void {
     this.store.dispatch(
-      setTodo({ selectedTodo: { ...todo, isClosed: !todo.isClosed } })
+      updateTodo({ selectedTodo: { ...todo, isClosed: !todo.isClosed } })
     );
   }
 }

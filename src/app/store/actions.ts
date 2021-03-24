@@ -10,7 +10,14 @@ export const loadTodosSuccess = createAction(
 
 export const loadTodosFailed = createAction('[Todos] Load todos failed');
 
-export const setTodo = createAction(
-  '[Todo] Update todo',
+export const updateTodo = createAction(
+  '[Todos] Update todo',
   props<{ selectedTodo: Todo }>()
 );
+
+export const updateTodoSuccess = createAction(
+  '[Todos] Update todo success',
+  props<{ selectedTodo: Todo }>()
+);
+
+export const updateTodoFailed = createAction('[Todos] Update todo failed');
