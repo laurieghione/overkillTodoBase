@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TodoListDetailComponent } from './todo-list/todo-list-detail/todo-list-detail.component';
-import { TodoListDetailGuard } from './guards/todo-list-detail.guard';
-import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
+import { TodoDetailGuard } from './guards/todo-detail.guard';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoFormComponent } from './components/todo-form/todo-form.component';
 
 const routes: Routes = [
   {
-    path: 'todo/:id',
-    canActivate: [TodoListDetailGuard],
-    component: TodoListDetailComponent,
+    path: 'todo/add',
+    component: TodoFormComponent,
   },
+  {
+    path: 'todo/:id',
+    canActivate: [TodoDetailGuard],
+    component: TodoDetailComponent,
+  },
+
   { path: '', component: TodoListComponent, pathMatch: 'full' },
   { path: '**', component: TodoListComponent },
 ];

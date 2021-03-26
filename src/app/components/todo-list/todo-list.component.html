@@ -1,0 +1,33 @@
+<div class="container">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <mat-card *ngIf="!loading">
+    <mat-card-title>Todos</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let todo of todos$ | async">
+          <h4
+            matLine
+            [ngStyle]="{
+              'text-decoration': todo.isClosed ? 'line-through' : ''
+            }"
+          >
+            <mat-checkbox
+              (change)="onChange(todo)"
+              [checked]="todo.isClosed"
+              disabled="false"
+            ></mat-checkbox>
+            <a [routerLink]="['/todo', todo.id]"> {{ todo.title }}</a>
+          </h4>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions id="actions">
+      <button mat-stroked-button (click)="onAdd()">
+        <mat-icon aria-hidden="false" aria-label="add icon"
+          >add_circle</mat-icon
+        >
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

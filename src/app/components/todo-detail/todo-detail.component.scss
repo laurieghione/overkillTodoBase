@@ -1,0 +1,8 @@
+#content {
+  margin-top: 2rem;
+}
+
+:host ::ng-deep .mat-card-header-text {
+  display: flex;
+  align-self: center;
+}

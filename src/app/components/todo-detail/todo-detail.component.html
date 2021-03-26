@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-card *ngIf="todo">
+    <mat-card-header id="header">
+      <div mat-card-avatar id="header-icon">
+        <mat-icon aria-hidden="false" aria-label="light icon"
+          >lightbulb</mat-icon
+        >
+      </div>
+      <mat-card-title id="header-title"
+        >{{ todo.title }}
+        <mat-icon
+          *ngIf="todo.isClosed"
+          id="header-check-icon"
+          aria-hidden="false"
+          aria-label="check icon"
+          >check_circle</mat-icon
+        >
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content id="content">
+      <p>{{ todo.description }}</p></mat-card-content
+    >
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <button mat-stroked-button (click)="goToHome()">
+        <mat-icon aria-hidden="false" aria-label="back icon"
+          >keyboard_backspace</mat-icon
+        >
+        Back
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

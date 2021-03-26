@@ -8,6 +8,15 @@ export const selectTodos = createSelector(
   (state: State) => state.todos
 );
 
-export const selectTodo = createSelector(getState, (state: State, props: any) =>
-  state.todos ? state.todos.find((todo) => todo.id === props.id) : null
+export const selectTodo = createSelector(
+  getState,
+  (state: State, props: { id: number }) =>
+    state.todos && state.todos.length
+      ? state.todos.find((todo) => todo.id === props.id)
+      : null
+);
+
+export const selectLoading = createSelector(
+  getState,
+  (state: State) => state.loading
 );

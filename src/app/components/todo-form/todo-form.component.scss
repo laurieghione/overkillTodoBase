@@ -1,0 +1,19 @@
+#content {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+  height: 8rem;
+}
+
+:host ::ng-deep .mat-card-header-text {
+  display: flex;
+  align-self: center;
+}
+
+mat-card-actions {
+  justify-content: space-between;
+  display: flex;
+}

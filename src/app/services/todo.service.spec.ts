@@ -6,7 +6,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { first } from 'rxjs/operators';
-import { Todo } from '../models/todo';
+import { Todo } from '@models/todo';
 import { environment } from '../../environments/environment';
 
 describe('TodoService', () => {
@@ -60,6 +60,26 @@ describe('TodoService', () => {
       (r) => r.url === `${environment.baseUrl}/api/todos/0`
     );
     expect(req.request.method).toEqual('PUT');
+
+    req.flush(todo);
+  });
+
+  it('should create todo', (done: DoneFn) => {
+    const todo: Todo = {
+      id: 1,
+      title: 'todo 2',
+      description: 'go jogging',
+      isClosed: false,
+    };
+    service.create(todo).subscribe((res: Todo) => {
+      expect(res).toEqual(todo);
+      done();
+    }, done.fail);
+
+    const req = httpMock.expectOne(
+      (r) => r.url === `${environment.baseUrl}/api/todos`
+    );
+    expect(req.request.method).toEqual('POST');
 
     req.flush(todo);
   });

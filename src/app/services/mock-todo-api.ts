@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Todo } from '../models/todo';
+import { Todo } from '@models/todo';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class MockTodoApi implements InMemoryDbService {
         id: 2,
         title: 'todo in memory 3',
         isClosed: true,
-        description: 'Appeler Michel à 16h',
+        description: 'Miroir : 60x49 cm',
       },
       { id: 3, title: 'todo in memory 4', isClosed: false },
     ];

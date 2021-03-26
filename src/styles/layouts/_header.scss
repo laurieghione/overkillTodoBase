@@ -1,0 +1,17 @@
+#header {
+  #header-icon {
+    background-color: $grey;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: $white;
+  }
+  #header-title {
+    display: flex;
+    align-items: center;
+  }
+  #header-check-icon {
+    margin-left: 0.7rem;
+    color: $pink;
+  }
+}

@@ -7,6 +7,9 @@ import {
   updateTodo,
   updateTodoFailed,
   updateTodoSuccess,
+  createTodo,
+  createTodoSuccess,
+  createTodoFailed,
 } from './actions';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { TodoService } from '../services/todo.service';
@@ -25,13 +28,24 @@ export class Effects {
     )
   );
 
-  updateTodos$ = createEffect(() =>
+  updateTodo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateTodo),
       mergeMap((action) =>
         this.todoService.update(action.selectedTodo).pipe(
           map(() => updateTodoSuccess({ selectedTodo: action.selectedTodo })),
           catchError(() => [updateTodoFailed()])
+        )
+      )
+    )
+  );
+  createTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createTodo),
+      mergeMap((action) =>
+        this.todoService.create(action.newTodo).pipe(
+          map((todo) => createTodoSuccess({ todo })),
+          catchError(() => [createTodoFailed()])
         )
       )
     )

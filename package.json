@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "format": "prettier --write \"./@(src|tests)/**/*.@(js|html|scss|json)\""
+    "format": "prettier --write \"./@(src|tests)/**/*.@(js|html|scss|json)\"",
+    "compodoc": "npx compodoc -p tsconfig.json"
   },
   "private": true,
   "dependencies": {
