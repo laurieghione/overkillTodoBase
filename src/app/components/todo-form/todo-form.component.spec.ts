@@ -14,10 +14,10 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockComponents } from 'ng-mocks';
-import { Todo } from 'src/app/models/todo';
-import { createTodo } from 'src/app/store/actions';
-import { State } from 'src/app/store/reducer';
-import { selectLoading } from 'src/app/store/selectors';
+import { Todo } from '@models/todo';
+import { createTodo } from '@store/actions';
+import { State } from '@store/reducer';
+import { selectLoading } from '@store/selectors';
 
 import { TodoFormComponent } from './todo-form.component';
 

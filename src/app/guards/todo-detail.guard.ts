@@ -23,7 +23,6 @@ export class TodoDetailGuard implements CanActivate {
     | boolean
     | UrlTree {
     let id = +route.url[1].path;
-
     if (isNaN(id)) {
       console.error('invalid todo Id');
       this.router.navigate(['']);

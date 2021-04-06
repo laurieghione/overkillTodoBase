@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { selectTodo, selectTodos } from '@store/selectors';
+import { select, Store } from '@ngrx/store';
+import { selectLoading, selectTodo, selectTodos } from '@store/selectors';
 import { Todo } from '@models/todo';
 import { Observable } from 'rxjs';
 
@@ -23,10 +23,14 @@ export class TodoDetailComponent implements OnInit {
 
   ngOnInit(): void {
     let id: string | null = this.route.snapshot.paramMap.get('id');
-    this.store.select(selectTodo, { id: Number(id) }).subscribe((todo) => {
-      this.todo = todo;
-      if (!todo) {
-        this.goToHome();
+    this.store.pipe(select(selectLoading)).subscribe((loading) => {
+      if (!loading) {
+        this.store.select(selectTodo, { id: Number(id) }).subscribe((todo) => {
+          this.todo = todo;
+          if (!todo) {
+            this.goToHome();
+          }
+        });
       }
     });
   }

@@ -13,7 +13,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockComponents } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { State } from '@store/reducer';
-import { selectTodo, selectTodos } from '@store/selectors';
+import { selectLoading, selectTodo, selectTodos } from '@store/selectors';
 
 import { TodoDetailComponent } from './todo-detail.component';
 import { MatIcon } from '@angular/material/icon';
@@ -25,6 +25,7 @@ describe('TodoDetailComponent', () => {
   let store: MockStore<State>;
   let router: Router;
   let mockedselectedTodo: any;
+  let mockSelectLoading: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -65,6 +66,7 @@ describe('TodoDetailComponent', () => {
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(TodoDetailComponent);
     component = fixture.componentInstance;
+    store.overrideSelector(selectLoading, false);
     store.overrideSelector(selectTodos, [
       {
         id: 0,
